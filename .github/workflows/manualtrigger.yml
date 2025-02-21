@@ -1,7 +1,27 @@
 name: manualWorkflow
 
 on: 
-    workflow_dispatch: 
+    workflow_dispatch:
+        inputs:
+          Environment:
+            description: QA Server
+            required: true
+            default: prod
+            type: choice
+            options:
+              - development
+              - staging
+              - uat
+              - prod
+
+          Test Suite:
+            description: Test Run
+            required: false
+            type: choice
+            options:
+              - Regression
+              - Smoke
+              - Dimond
 
 jobs: 
     manualJobs:
