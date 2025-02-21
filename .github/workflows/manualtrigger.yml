@@ -44,15 +44,15 @@ jobs:
               run: npx playwright install --with-deps
             
             - name: Run the Regression Test Cases
-              if: ${{github.action.inputs['Test Suite'] == 'Regression'}}
+              if: ${{github.event.inputs['Test Suite'] == 'Regression'}}
               run: npx playwright test -g @regression
 
             - name: Run the Smoke Test Cases
-              if: ${{github.action.inputs['Test Suite'] == 'Smoke'}}
+              if: ${{github.event.inputs['Test Suite'] == 'Smoke'}}
               run: npx playwright test -g @smoke
 
             - name: Run the Sanity Test Cases
-              if: ${{github.action.inputs['Test Suite'] == 'Sanity'}}
+              if: ${{github.event.inputs['Test Suite'] == 'Sanity'}}
               run: npx playwright test -g @sanity
 
             - name: Upload the report
