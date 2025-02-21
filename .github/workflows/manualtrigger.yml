@@ -1,0 +1,35 @@
+name: manualWorkflow
+
+on: 
+    push:
+        branches: [master, main]
+
+jobs: 
+    manualJobs:
+        timeout-minutes: 30
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repository
+              uses:  actions/checkout@v4
+
+            - name: Set up Node.JS
+              uses: actions/setup-node@v4
+              with:
+                node-version: lts/*
+            
+            - name: Install dependencies of Playwright
+              run: npm ci
+
+            - name: Install Playwright Browsers
+              run: npx playwright install --with-deps
+            
+            - name: Run the Playwright Tests
+              run: npx playwright test
+
+            - name: Upload the report
+              uses: actions/upload-artifact@v4
+              if: ${{!cancelled()}}
+              with:
+                name: Playwright-report-generate
+                path: Playwright-report-generate
+                retention-days: 10
