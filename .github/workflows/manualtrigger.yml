@@ -18,7 +18,7 @@ on:
             description: Test Run
             required: false
             type: choice
-            default: none
+            default: Sanity
             options:
               - Regression
               - Smoke
