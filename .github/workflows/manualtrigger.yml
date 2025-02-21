@@ -18,10 +18,11 @@ on:
             description: Test Run
             required: false
             type: choice
+            default: none
             options:
               - Regression
               - Smoke
-              - Dimond
+              - Sanity
 
 jobs: 
     manualJobs:
@@ -42,8 +43,17 @@ jobs:
             - name: Install Playwright Browsers
               run: npx playwright install --with-deps
             
-            - name: Run the Playwright Tests
-              run: npx playwright test
+            - name: Run the Regression Test Cases
+              if: ${{github.action.inputs['Test Suite'] == 'Regression'}}
+              run: npx playwright test -g @regression
+
+            - name: Run the Smoke Test Cases
+              if: ${{github.action.inputs['Test Suite'] == 'Smoke'}}
+              run: npx playwright test -g @smoke
+
+            - name: Run the Sanity Test Cases
+              if: ${{github.action.inputs['Test Suite'] == 'Sanity'}}
+              run: npx playwright test -g @sanity
 
             - name: Upload the report
               uses: actions/upload-artifact@v4
