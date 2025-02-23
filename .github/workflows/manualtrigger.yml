@@ -53,7 +53,7 @@ jobs:
 
             - name: Run the Sanity Test Cases
               if: ${{github.event.inputs['Test Suite'] == 'Sanity'}}
-              run: npx playwright test -g @sanity
+              run: ENVIRONMENT=${{github.event.inputs['Environment']}} npx playwright test -g @sanity
 
             - name: Upload the report
               uses: actions/upload-artifact@v4
