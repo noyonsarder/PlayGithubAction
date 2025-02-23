@@ -6,13 +6,13 @@ on:
           Environment:
             description: QA Server
             required: true
-            default: prod
+            default: qa1
             type: choice
             options:
-              - development
-              - staging
-              - uat
-              - prod
+              - qa1
+              - qa2
+              - qa3
+              - qa4
 
           Test Suite:
             description: Test Run
