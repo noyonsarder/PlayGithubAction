@@ -1,17 +1,18 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+const env_url ={
 
-/**
- * @see https://playwright.dev/docs/test-configuration
- */
+  qa1: "https://ui-qa1.fndev.net/",
+  qa2: "https://ui-qa2.fndev.net/",
+  qa3: "https://ui-qa3.fndev.net/",
+  qa4: "https://ui-qa4.fndev.net/"
+};
+
+const env= process.env.ENVIRONMENT || "qa3";
+const base_url = env_url[env]
+
+
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -31,6 +32,7 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    baseURL: base_url
   },
 
   /* Configure projects for major browsers */
