@@ -25,13 +25,17 @@ on:
               - Sanity
 
     schedule:
-        - cron: "30 9 * * *"
+        - cron: "45 9 * * *" # Runs every day at 3:20 PM BDT (UTC+6)
 
 jobs: 
     manualJobs:
         timeout-minutes: 30
         runs-on: ubuntu-latest
         steps:
+
+            - name: Checking the time
+              run: date -u # Print the timezone
+
             - name: Checkout Repository
               uses:  actions/checkout@v4
 
