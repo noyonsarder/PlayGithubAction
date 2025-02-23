@@ -24,6 +24,9 @@ on:
               - Smoke
               - Sanity
 
+    schedule:
+        - cron: "30 9 * * *"
+
 jobs: 
     manualJobs:
         timeout-minutes: 30
